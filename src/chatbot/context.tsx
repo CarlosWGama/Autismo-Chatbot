@@ -1,5 +1,5 @@
 import React, { createContext } from 'react';
-import { CBAction, CBButton, CBInput, CBMessage, Face, getAvatar } from './interfaces';
+import { CBAction, CBButton, CBInput, CBMessage, Face } from './interfaces';
 
 export const ChatBotContext = createContext({} as {
     CBMessages: CBMessage[], 
@@ -17,7 +17,7 @@ export const ChatBotContextProvider = (props: any) => {
     const [ CBInput, setCBInput] = React.useState<CBInput|null>(null);
 
     //Adiciona a fala
-    const doAction = async (messages: CBMessage[], buttons:CBButton[] = [], input?: CBInput) => {
+    const doAction = async (messages: CBMessage[], buttons:CBButton[]|null = [], input?: CBInput|null) => {
         
         const newMessages = [...CBMessages];
         setCBButtons([]);
@@ -27,7 +27,7 @@ export const ChatBotContextProvider = (props: any) => {
         for (let i = 0; i < messages.length; i++) {
             if (messages[i].avatar)
                  setCBAvatar(messages[i].avatar)
-
+            //@ts-ignore
             if (messages[i].delay && messages[i].delay > 0) {
                 newMessages.push({message: 'Digitando...', you: messages[i].you});
                 setCBMessages(newMessages);

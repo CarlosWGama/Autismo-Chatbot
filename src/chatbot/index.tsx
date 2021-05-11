@@ -20,11 +20,7 @@ export default function Chatbot (props: ChatbotProps) {
     const { CBMessages, CBButtons, CBInput, CBAvatar, doAction } = useChatBot();
     const flatListRef = React.useRef(null);
 
-    React.useEffect(() => {
-        flatListRef.current.scrollToEnd();
-    }, [CBButtons])
-
-    return (
+       return (
         <LinearGradient 
             colors={['#f6d365', '#fda085']}
             style={styles.container}>
@@ -35,7 +31,10 @@ export default function Chatbot (props: ChatbotProps) {
             <FlatList
                 ref={flatListRef}
                 keyExtractor={(item, index) => String(index) }
-                onContentSizeChange={() => flatListRef.current.scrollToEnd()}
+                onContentSizeChange={() => {
+                    //@ts-ignore
+                    flatListRef.current.scrollToEnd()
+                }}
                 data={CBMessages}
                 // style={styles.messages}>
                 renderItem={({item, index}) => (
