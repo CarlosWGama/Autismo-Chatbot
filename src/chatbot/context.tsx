@@ -6,11 +6,13 @@ export const ChatBotContext = createContext({} as {
     CBButtons: CBButton[],
     CBInput: CBInput|null, 
     CBAvatar: any,
-    doAction: CBAction
+    doAction: CBAction,
+    CBChange: boolean
 });
 
 export const ChatBotContextProvider = (props: any) => {
 
+    const [ CBChange, setCBChange] = React.useState<boolean>(false);
     const [ CBMessages, setCBMessages] = React.useState<CBMessage[]>([]);
     const [ CBAvatar, setCBAvatar] = React.useState<any>(Face.NEUTRO);
     const [ CBButtons, setCBButtons] = React.useState<CBButton[]>([]);
@@ -25,19 +27,23 @@ export const ChatBotContextProvider = (props: any) => {
 
         //Executa as mensagens
         for (let i = 0; i < messages.length; i++) {
-            if (messages[i].avatar)
+
+            if (messages[i].hasOwnProperty('avatar'))
                  setCBAvatar(messages[i].avatar)
+
             //@ts-ignore
-            if (messages[i].delay && messages[i].delay > 0) {
+            if (messages[i].hasOwnProperty('delay') && messages[i].delay > 0) {
                 newMessages.push({message: 'Digitando...', you: messages[i].you});
+                
                 setCBMessages(newMessages);
             
                 await new Promise(resolve => setInterval(() => resolve(''), messages[i].delay))
                 newMessages.pop()
             }
             newMessages.push(messages[i])
-
+            
             setCBMessages(newMessages);            
+            setCBChange(!CBChange)
         }
         
         //Executa os botões
@@ -48,7 +54,7 @@ export const ChatBotContextProvider = (props: any) => {
     }
 
     return (
-        <ChatBotContext.Provider value={{CBMessages, CBButtons, CBInput, doAction, CBAvatar}}>
+        <ChatBotContext.Provider value={{CBMessages, CBButtons, CBInput, doAction, CBAvatar, CBChange}}>
             {props.children}
         </ChatBotContext.Provider>
     )

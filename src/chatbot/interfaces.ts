@@ -1,7 +1,7 @@
 
 export enum Face {
-    NEUTRO = require('./imgs/feliz.jpg'),
-    FELIZ = require('./imgs/neutro.jpg'),
+    NEUTRO = require('./imgs/neutro.jpg'),
+    FELIZ = require('./imgs/feliz.jpg'),
     RAIVA = require('./imgs/raiva.jpg'),
     TRISTE = require('./imgs/triste.jpg'),
     ESPANTO = require('./imgs/espantada.jpg'),
@@ -17,7 +17,7 @@ export interface CBMessage {
     avatar?: Face,
     message: string,
     delay?: number,
-    you: boolean,
+    you?: boolean,
 }
 
 export interface CBInput {

@@ -17,7 +17,7 @@ export const Btn = (props:{title:string, onPress:any}) => {
 export default function Chatbot (props: ChatbotProps) {
 
     const [ textInput, setTextInput ] = React.useState<string|null>(null);
-    const { CBMessages, CBButtons, CBInput, CBAvatar, doAction } = useChatBot();
+    const { CBMessages, CBButtons, CBInput, CBAvatar, doAction, CBChange } = useChatBot();
     const flatListRef = React.useRef(null);
 
        return (
@@ -30,6 +30,7 @@ export default function Chatbot (props: ChatbotProps) {
             {/* MENSAGENS */}
             <FlatList
                 ref={flatListRef}
+                extraData={CBChange}
                 keyExtractor={(item, index) => String(index) }
                 onContentSizeChange={() => {
                     //@ts-ignore
@@ -95,7 +96,16 @@ const styles = StyleSheet.create({
         padding: 5,
         borderRadius: 5,
         color: 'white',
-        fontSize: 17
+        fontSize: 17,
+        
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 3,
+        },
+        shadowOpacity: 0.29,
+        shadowRadius: 4.65,
+        elevation: 7,
     },
     msgbot: {
         backgroundColor: '#82968C',

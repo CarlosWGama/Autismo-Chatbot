@@ -1,13 +1,12 @@
-import { useChatBot } from "../../../chatbot/context";
 import { CBAction, Face } from "../../../chatbot/interfaces";
 
-export function ola(doAction: CBAction) {
+export function bemVindo(doAction: CBAction) {
     doAction([
-        {message: 'Olá!', delay: 2000, you: false},
-        {message: 'Oi!', you: true},
+        {message: 'Bem vindo! Eu sou Ale e estou aqui para te ajudar um pouco sobre assuntos de autismo!', delay: 3000, avatar: Face.FELIZ},
+        {message: 'O que você gostaria de saber?', delay: 2000, avatar: Face.NEUTRO},
     ], [
-        {title: 'Qual seu nome?', onPress:digiteSeuNome},
-        {title: 'Opção 2', onPress:clicou}
+        {title: 'Autismo', onPress:digiteSeuNome},
+        {title: 'Me fale sobre você', onPress:clicou}
     ])
 }
 
@@ -19,9 +18,10 @@ export function digiteSeuNome(doAction: CBAction) {
 
 export function olaPessoa(doAction: CBAction, nome: string) {
     doAction([
+        {message: nome, you: true},
         {message: 'Olá ' + nome, delay: 2000, you: false},
     ], [
-        {onPress:ola, title: 'Repetir'}
+        {onPress:bemVindo, title: 'Repetir'}
     ]);
 
 
@@ -32,6 +32,6 @@ export function clicou(doAction: CBAction) {
         {message: 'Cliquei!', you: true},
         {message: 'Ainda bem!!', delay: 3000, you: false}
     ], [
-        {title:'Repetir', onPress: ola}
+        {title:'Repetir', onPress: bemVindo}
     ])
 }
