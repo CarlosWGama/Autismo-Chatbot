@@ -118,7 +118,8 @@ const styles = StyleSheet.create({
     // Botões
     buttons: {
         flexDirection: 'row',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        flexWrap: 'wrap'
     },
     btn: {
         margin: 10, 

@@ -9,7 +9,7 @@ export enum Face {
 }
 
 export interface CBAction {
-    (messages: CBMessage[], buttons?: CBButton[]|null, input?: CBInput|null): void;
+    (messages: CBMessage[], buttons?: CBButton[]|null, input?: CBInput|null): Promise<void>;
 } 
 
 // Mensagem dita

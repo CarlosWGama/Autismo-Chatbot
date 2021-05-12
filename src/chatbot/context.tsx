@@ -21,10 +21,11 @@ export const ChatBotContextProvider = (props: any) => {
     //Adiciona a fala
     const doAction = async (messages: CBMessage[], buttons:CBButton[]|null = [], input?: CBInput|null) => {
         
-        const newMessages = [...CBMessages];
+        const newMessages = CBMessages;
         setCBButtons([]);
         setCBInput(null);
 
+        let change = CBChange;    
         //Executa as mensagens
         for (let i = 0; i < messages.length; i++) {
 
@@ -42,8 +43,9 @@ export const ChatBotContextProvider = (props: any) => {
             }
             newMessages.push(messages[i])
             
-            setCBMessages(newMessages);            
-            setCBChange(!CBChange)
+            setCBMessages(newMessages); 
+            change = !change;     
+            setCBChange(change)
         }
         
         //Executa os botões
